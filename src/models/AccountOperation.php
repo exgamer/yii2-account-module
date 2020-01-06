@@ -57,8 +57,7 @@ class AccountOperation extends ActiveRecord
                     'account_id',
                     'payment_system_id',
                     'type',
-                    'payment_system_transaction_status',
-                    'status'
+                    'payment_system_transaction_status'
                 ],
                 'integer'
             ],

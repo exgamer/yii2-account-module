@@ -18,7 +18,6 @@ class AccountOperationForm extends Form
     public $sum;
     public $type;
     public $description;
-    public $status;
 
     /**
      * @see CForm::formRules()

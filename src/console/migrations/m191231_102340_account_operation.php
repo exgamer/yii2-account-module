@@ -22,10 +22,8 @@ class m191231_102340_account_operation extends Migration
             'sum' => $this->double(),
             'type' => $this->smallInteger()->notNull(),
             'description' => $this->string(255),
-            'status' => $this->smallInteger()->defaultValue(0),
             'created_at' => $this->dateTime()->defaultValue(new \yii\db\Expression("NOW()") ),
         ]);
-        $this->addIndex(['status']);
         $this->addIndex(['account_id']);
         $this->addIndex(['payment_system_id']);
         $this->addForeign('account_id', 'account','id');

@@ -103,7 +103,6 @@ class AccountOperationService extends Service
         $form->payment_system_transaction_number = $payment_system_transaction_number;
         $form->payment_system_transaction_status = $payment_system_transaction_status;
         $form->sum = $sum;
-        $form->status = 1;
         $form->account_id = $account->id;
         if ($description){
             $form->description = $description;
