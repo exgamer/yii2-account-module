@@ -21,7 +21,6 @@ class m191231_102340_account_operation extends Migration
             'payment_system_transaction_status' =>  $this->smallInteger(),
             'sum' => $this->double(),
             'type' => $this->smallInteger()->notNull(),
-            'currency' => $this->bigInteger()->notNull(),
             'description' => $this->string(255),
             'status' => $this->smallInteger()->defaultValue(0),
             'created_at' => $this->dateTime()->defaultValue(new \yii\db\Expression("NOW()") ),

@@ -17,7 +17,6 @@ class AccountOperationForm extends Form
     public $payment_system_transaction_status;
     public $sum;
     public $type;
-    public $currency;
     public $description;
     public $status;
 
@@ -29,7 +28,6 @@ class AccountOperationForm extends Form
         return [
             [
                 [
-                    'currency',
                     'account_id',
                     'payment_system_id',
                     'payment_system_transaction_number',

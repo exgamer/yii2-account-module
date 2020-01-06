@@ -56,7 +56,7 @@ class Account extends ActiveRecord
                 [
                     'entity_id',
                     'entity_type_id',
-                    'currency',
+                    'currency_id',
                     'status'
                 ],
                 'integer'
@@ -69,7 +69,7 @@ class Account extends ActiveRecord
         return [
             'id' => Yii::t('account', '#'),
             'entity_id' => Yii::t('account', 'Сущность'),
-            'currency' => Yii::t('account', 'Валюта'),
+            'currency_id' => Yii::t('account', 'Валюта'),
             'balance' => Yii::t('account', 'Баланс'),
             'created_at' => Yii::t('account', 'Дата создания'),
         ];

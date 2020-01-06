@@ -14,7 +14,7 @@ class AccountForm extends Form
     public $entity_id;
     public $entity_type_id;
     public $balance;
-    public $currency;
+    public $currency_id;
     public $status;
 
     /**
@@ -25,7 +25,7 @@ class AccountForm extends Form
         return [
             [
                 [
-                    'currency',
+                    'currency_id',
                     'entity_type_id',
                     'entity_id'
                 ],

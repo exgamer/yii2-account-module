@@ -3,7 +3,6 @@ namespace concepture\yii2account\models;
 
 use Yii;
 use concepture\yii2logic\models\ActiveRecord;
-use concepture\yii2handbook\models\traits\CurrencyTrait;
 use concepture\yii2handbook\models\traits\PaymentSystemTrait;
 
 /**
@@ -13,7 +12,6 @@ use concepture\yii2handbook\models\traits\PaymentSystemTrait;
  */
 class AccountOperation extends ActiveRecord
 {
-    use CurrencyTrait;
     use PaymentSystemTrait;
 
     /**
@@ -58,7 +56,6 @@ class AccountOperation extends ActiveRecord
                 [
                     'account_id',
                     'payment_system_id',
-                    'currency',
                     'type',
                     'payment_system_transaction_status',
                     'status'
@@ -74,7 +71,6 @@ class AccountOperation extends ActiveRecord
     {
         return [
             'id' => Yii::t('account', '#'),
-            'currency' => Yii::t('account', 'Валюта'),
             'sum' => Yii::t('account', 'Сумма'),
             'account_id' => Yii::t('account', ' Аккаунт'),
             'payment_system_id' => Yii::t('account', 'Платежная система'),

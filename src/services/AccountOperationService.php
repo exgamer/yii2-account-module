@@ -29,23 +29,23 @@ class AccountOperationService extends Service
      * @param string $payment_system_transaction_number
      * @param integer $payment_system_transaction_status
      * @param double $sum
-     * @param integer $currency
+     * @param integer $currency_id
      * @param string $description
      * @return boolean
      * @throws Exception
      */
-    public function refill($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency, $description = null)
+    public function refill($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
     {
         $account = $this->accountService()->getOneByCondition([
             'entity_id' => $entity_id,
             'entity_type_id' => $entity_type_id,
-            'currency' => $currency,
+            'currency_id' => $currency_id,
         ]);
         if (! $account){
             $accountForm = new AccountForm();
             $accountForm->entity_id = $entity_id;
             $accountForm->entity_type_id = $entity_type_id;
-            $accountForm->currency = $currency;
+            $accountForm->currency_id = $currency_id;
             $accountForm->status = 1;
             $account = $this->userAccountService()->create($accountForm);
         }
@@ -61,17 +61,17 @@ class AccountOperationService extends Service
      * @param string $payment_system_transaction_number
      * @param integer $payment_system_transaction_status
      * @param double $sum
-     * @param integer $currency
+     * @param integer $currency_id
      * @param string $description
      * @return boolean
      * @throws Exception
      */
-    public function writeOff($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency, $description = null)
+    public function writeOff($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
     {
         $account = $this->accountService()->getOneByCondition([
             'entity_id' => $entity_id,
             'entity_type_id' => $entity_type_id,
-            'currency' => $currency,
+            'currency_id' => $currency_id,
         ]);
         if (! $account){
             throw new Exception("account not exists");
@@ -100,7 +100,6 @@ class AccountOperationService extends Service
     {
         $form = new AccountOperationForm();
         $form->type = $type;
-        $form->currency = $account->currency;
         $form->payment_system_transaction_number = $payment_system_transaction_number;
         $form->payment_system_transaction_status = $payment_system_transaction_status;
         $form->sum = $sum;
