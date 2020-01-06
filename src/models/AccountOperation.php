@@ -60,13 +60,13 @@ class AccountOperation extends ActiveRecord
                     'payment_system_id',
                     'currency',
                     'type',
+                    'payment_system_transaction_status',
                     'status'
                 ],
                 'integer'
             ],
             ['description', 'string', 'max' => 255],
-            ['payment_system_transaction_number', 'string', 'max' => 255],
-            ['payment_system_transaction_status', 'string', 'max' => 255],
+            ['payment_system_transaction_number', 'string', 'max' => 255]
         ];
     }
 

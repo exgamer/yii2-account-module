@@ -18,7 +18,7 @@ class m191231_102340_account_operation extends Migration
             'account_id' =>  $this->bigInteger()->notNull(),
             'payment_system_id' =>  $this->bigInteger()->notNull(),
             'payment_system_transaction_number' =>  $this->string(255),
-            'payment_system_transaction_status' =>  $this->string(50),
+            'payment_system_transaction_status' =>  $this->smallInteger(),
             'sum' => $this->double(),
             'type' => $this->smallInteger()->notNull(),
             'currency' => $this->bigInteger()->notNull(),
