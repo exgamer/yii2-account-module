@@ -15,7 +15,7 @@ trait ServicesTrait
     /**
      * @return AccountService
      */
-    public function userAccountService()
+    public function accountService()
     {
         return Yii::$app->accountService;
     }
@@ -23,7 +23,7 @@ trait ServicesTrait
     /**
      * @return AccountOperationService
      */
-    public function userAccountOperationService()
+    public function accountOperationService()
     {
         return Yii::$app->accountOperationService;
     }
