@@ -26,6 +26,7 @@ class AccountOperationService extends Service
      *
      * @param integer $entity_id
      * @param integer $entity_type_id
+     * @param integer $payment_system_id
      * @param string $payment_system_transaction_number
      * @param integer $payment_system_transaction_status
      * @param double $sum
@@ -34,7 +35,7 @@ class AccountOperationService extends Service
      * @return boolean
      * @throws Exception
      */
-    public function refill($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
+    public function refill($entity_id, $entity_type_id, $payment_system_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
     {
         $account = $this->accountService()->getOneByCondition([
             'entity_id' => $entity_id,
@@ -50,7 +51,7 @@ class AccountOperationService extends Service
             $account = $this->accountService()->create($accountForm);
         }
 
-        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::REFILL, $description);
+        return $this->doOperation($payment_system_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::REFILL, $description);
     }
 
     /**
@@ -58,6 +59,7 @@ class AccountOperationService extends Service
      *
      * @param integer $entity_id
      * @param integer $entity_type_id
+     * @param integer $payment_system_id
      * @param string $payment_system_transaction_number
      * @param integer $payment_system_transaction_status
      * @param double $sum
@@ -66,7 +68,7 @@ class AccountOperationService extends Service
      * @return boolean
      * @throws Exception
      */
-    public function writeOff($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
+    public function writeOff($entity_id, $entity_type_id, $payment_system_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency_id, $description = null)
     {
         $account = $this->accountService()->getOneByCondition([
             'entity_id' => $entity_id,
@@ -81,12 +83,13 @@ class AccountOperationService extends Service
             throw new Exception("not enough balance");
         }
 
-        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::WRITE_OFF, $description);
+        return $this->doOperation($payment_system_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::WRITE_OFF, $description);
     }
 
     /**
      * Операция
      *
+     * @param integer $payment_system_id
      * @param string $payment_system_transaction_number
      * @param integer $payment_system_transaction_status
      * @param double $sum
@@ -96,12 +99,13 @@ class AccountOperationService extends Service
      * @return bool
      * @throws Exception
      */
-    protected function doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, $type, $description = null)
+    protected function doOperation($payment_system_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, $type, $description = null)
     {
         $form = new AccountOperationForm();
         $form->type = $type;
         $form->payment_system_transaction_number = $payment_system_transaction_number;
         $form->payment_system_transaction_status = $payment_system_transaction_status;
+        $form->payment_system_id = $payment_system_id;
         $form->sum = $sum;
         $form->account_id = $account->id;
         if ($description){
