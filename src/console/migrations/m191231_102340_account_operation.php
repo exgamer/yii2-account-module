@@ -28,7 +28,7 @@ class m191231_102340_account_operation extends Migration
         $this->addIndex(['status']);
         $this->addIndex(['account_id']);
         $this->addIndex(['payment_system_id']);
-        $this->addForeign('account_id', 'user_account','id');
+        $this->addForeign('account_id', 'account','id');
         $this->addForeign('payment_system_id', 'payment_system','id');
     }
 }
