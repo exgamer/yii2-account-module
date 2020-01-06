@@ -110,15 +110,17 @@ class AccountOperationService extends Service
             $form->description = $description;
         }
 
-        if (! $this->userAccountOperationService()->create($form))
+        if (! $this->accountOperationService()->create($form))
         {
             throw new Exception("operation failed");
         }
 
-        if ($type == UserAccountOperationTypeEnum::REFILL){
+        if ($type == AccountOperationTypeEnum::REFILL){
             $account->balance += $form->sum;
-        }else{
+        }elseif ($type == AccountOperationTypeEnum::WRITE_OFF){
             $account->balance -= $form->sum;
+        }else{
+            return false;
         }
 
         if (! $account->save(false)){
