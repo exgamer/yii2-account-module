@@ -9,7 +9,7 @@
     
 
 Миграции
- php yii migrate/up --migrationPath=@concepture/yii2account/console/migrations
+ php yii migrate/up --migrationPath=@concepture/yii2account/console/migrations --interactive=0
  
 Подключение модуля для админки
 
