@@ -47,7 +47,7 @@ class AccountOperationService extends Service
             $accountForm->entity_type_id = $entity_type_id;
             $accountForm->currency_id = $currency_id;
             $accountForm->status = 1;
-            $account = $this->userAccountService()->create($accountForm);
+            $account = $this->accountService()->create($accountForm);
         }
 
         return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::REFILL, $description);
