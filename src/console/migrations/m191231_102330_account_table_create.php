@@ -27,7 +27,7 @@ class m191231_102330_account_table_create extends Migration
             ['entity_id', 'currency']);
         $this->addIndex(['entity_type_id']);
         $this->addIndex(['status']);
-        $this->addIndex(['user_id']);
+        $this->addIndex(['entity_id']);
         $this->addIndex(['currency']);
         $this->addForeign('user_id', 'user','id');
         $this->addForeign('currency', 'currency','id');
