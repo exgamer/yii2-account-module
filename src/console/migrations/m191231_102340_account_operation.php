@@ -11,7 +11,7 @@ class m191231_102340_account_operation extends Migration
         return 'account_operation';
     }
 
-    public function up()
+    public function safeUp()
     {
         $this->addTable([
             'id' => $this->bigPrimaryKey(),

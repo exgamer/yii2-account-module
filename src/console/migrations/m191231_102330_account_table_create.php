@@ -11,7 +11,7 @@ class m191231_102330_account_table_create extends Migration
         return 'account';
     }
 
-    public function up()
+    public function safeUp()
     {
         $this->addTable([
             'id' => $this->bigPrimaryKey(),
