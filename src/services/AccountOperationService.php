@@ -1,6 +1,7 @@
 <?php
 namespace concepture\yii2account\services;
 
+use concepture\yii2account\models\Account;
 use concepture\yii2logic\models\ActiveRecord;
 use concepture\yii2logic\services\Service;
 use concepture\yii2logic\services\traits\StatusTrait;
@@ -23,44 +24,53 @@ class AccountOperationService extends Service
     /**
      * Пополнение счета
      *
-     * @param integer $user_id
+     * @param integer $entity_id
+     * @param integer $entity_type_id
+     * @param string $payment_system_transaction_number
+     * @param integer $payment_system_transaction_status
      * @param double $sum
      * @param integer $currency
      * @param string $description
      * @return boolean
      * @throws Exception
      */
-    public function refill($user_id, $sum, $currency, $description = null)
+    public function refill($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency, $description = null)
     {
-        $account = $this->userAccountService()->getOneByCondition([
-            'user_id' => $user_id,
+        $account = $this->accountService()->getOneByCondition([
+            'entity_id' => $entity_id,
+            'entity_type_id' => $entity_type_id,
             'currency' => $currency,
         ]);
         if (! $account){
             $accountForm = new AccountForm();
-            $accountForm->user_id = $user_id;
+            $accountForm->entity_id = $entity_id;
+            $accountForm->entity_type_id = $entity_type_id;
             $accountForm->currency = $currency;
             $accountForm->status = 1;
             $account = $this->userAccountService()->create($accountForm);
         }
 
-        return $this->doOperation($sum, $account, UserAccountOperationTypeEnum::REFILL, $description);
+        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, UserAccountOperationTypeEnum::REFILL, $description);
     }
 
     /**
      * Снятие со счета
      *
-     * @param integer $user_id
+     * @param integer $entity_id
+     * @param integer $entity_type_id
+     * @param string $payment_system_transaction_number
+     * @param integer $payment_system_transaction_status
      * @param double $sum
      * @param integer $currency
      * @param string $description
      * @return boolean
      * @throws Exception
      */
-    public function writeOff($user_id, $sum, $currency, $description = null)
+    public function writeOff($entity_id, $entity_type_id, $payment_system_transaction_number, $payment_system_transaction_status, $sum, $currency, $description = null)
     {
-        $account = $this->userAccountService()->getOneByCondition([
-            'user_id' => $user_id,
+        $account = $this->accountService()->getOneByCondition([
+            'entity_id' => $entity_id,
+            'entity_type_id' => $entity_type_id,
             'currency' => $currency,
         ]);
         if (! $account){
@@ -71,24 +81,28 @@ class AccountOperationService extends Service
             throw new Exception("not enough balance");
         }
 
-        return $this->doOperation($sum, $account, UserAccountOperationTypeEnum::WRITE_OFF, $description);
+        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, UserAccountOperationTypeEnum::WRITE_OFF, $description);
     }
 
     /**
      * Операция
      *
-     * @param $sum
-     * @param $account
-     * @param $type
+     * @param string $payment_system_transaction_number
+     * @param integer $payment_system_transaction_status
+     * @param double $sum
+     * @param Account $account
+     * @param integer $type
      * @param string $description
      * @return bool
      * @throws Exception
      */
-    protected function doOperation($sum, $account, $type, $description = null)
+    protected function doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, $type, $description = null)
     {
         $form = new AccountOperationForm();
         $form->type = $type;
         $form->currency = $account->currency;
+        $form->payment_system_transaction_number = $payment_system_transaction_number;
+        $form->payment_system_transaction_status = $payment_system_transaction_status;
         $form->sum = $sum;
         $form->status = 1;
         $form->account_id = $account->id;
