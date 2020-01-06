@@ -24,7 +24,7 @@ class m191231_102330_account_table_create extends Migration
             'updated_at' => $this->dateTime(),
         ]);
         $this->addUniqueIndex(
-            ['entity_id', 'currency']);
+            ['entity_id', 'entity_type_id',  'currency']);
         $this->addIndex(['entity_type_id']);
         $this->addIndex(['status']);
         $this->addIndex(['entity_id']);
