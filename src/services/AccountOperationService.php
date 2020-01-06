@@ -50,7 +50,7 @@ class AccountOperationService extends Service
             $account = $this->userAccountService()->create($accountForm);
         }
 
-        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, UserAccountOperationTypeEnum::REFILL, $description);
+        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::REFILL, $description);
     }
 
     /**
@@ -81,7 +81,7 @@ class AccountOperationService extends Service
             throw new Exception("not enough balance");
         }
 
-        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, UserAccountOperationTypeEnum::WRITE_OFF, $description);
+        return $this->doOperation($payment_system_transaction_number, $payment_system_transaction_status, $sum, $account, AccountOperationTypeEnum::WRITE_OFF, $description);
     }
 
     /**
