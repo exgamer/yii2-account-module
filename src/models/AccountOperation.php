@@ -66,6 +66,7 @@ class AccountOperation extends ActiveRecord
             ],
             ['description', 'string', 'max' => 255],
             ['payment_system_transaction_number', 'string', 'max' => 255],
+            ['payment_system_transaction_status', 'string', 'max' => 255],
         ];
     }
 
@@ -78,6 +79,7 @@ class AccountOperation extends ActiveRecord
             'account_id' => Yii::t('account', ' Аккаунт'),
             'payment_system_id' => Yii::t('account', 'Платежная система'),
             'payment_system_transaction_number' => Yii::t('account', 'Номер транзакции платежной системы'),
+            'payment_system_transaction_status' => Yii::t('account', 'Статус транзакции платежной системы'),
             'type' => Yii::t('account', ' Вид операции'),
             'description' => Yii::t('account', 'Описание'),
             'created_at' => Yii::t('account', 'Дата создания'),

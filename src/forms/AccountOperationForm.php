@@ -14,6 +14,7 @@ class AccountOperationForm extends Form
     public $account_id;
     public $payment_system_id;
     public $payment_system_transaction_number;
+    public $payment_system_transaction_status;
     public $sum;
     public $type;
     public $currency;
@@ -32,6 +33,7 @@ class AccountOperationForm extends Form
                     'account_id',
                     'payment_system_id',
                     'payment_system_transaction_number',
+                    'payment_system_transaction_status',
                     'type',
                     'sum'
                 ],
